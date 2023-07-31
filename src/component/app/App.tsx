@@ -1,4 +1,4 @@
-import Accordion from "../accordion/Accordion";
+import SearchPage from "../searchPage/SearchPage";
 import { IData } from "../../types";
 
 const App: React.FC = () => {
@@ -70,7 +70,7 @@ const App: React.FC = () => {
     <div className="App">
       <header className="App-header">
         <main>
-          <Accordion data={data} />
+          <SearchPage data={data} />
         </main>
       </header>
     </div>

@@ -20,19 +20,22 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
   renderAccordionItems,
 }) => {
   return (
-    <ListItem
-      disablePadding
-      divider
-      sx={{ flexDirection: "column", alignItems: "flex-start", pl: 2 }}
-    >
-      <ListItemButton component="div" onClick={() => toggle()}>
+    <div style={{ paddingLeft: "20px" }}>
+      <ListItemButton
+        component="div"
+        sx={{
+          width: "100%",
+          borderBottom: "1px solid #C0C0C0",
+        }}
+        onClick={() => toggle()}
+      >
         <ListItemIcon>
           {!isOpen ? <ChevronRightIcon /> : <ExpandMoreIcon />}
         </ListItemIcon>
         <ListItemText primary={title} />
       </ListItemButton>
       {isOpen && renderAccordionItems()}
-    </ListItem>
+    </div>
   );
 };
 export default AccordionItem;

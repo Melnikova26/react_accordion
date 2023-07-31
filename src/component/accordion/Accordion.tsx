@@ -21,7 +21,7 @@ const Accordion: React.FC<AccordionProps> = ({ data }) => {
     if (!accordionItem || accordionItem.length === 0) return null;
 
     return (
-      <List component="div" disablePadding>
+      <List component="div" sx={{ width: "100%" }}>
         {accordionItem.map((item) => (
           <AccordionItem
             key={item.id}
