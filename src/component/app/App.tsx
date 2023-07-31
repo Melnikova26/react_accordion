@@ -1,8 +1,5 @@
-interface IData {
-  id: number;
-  title: string;
-  children: IData[];
-}
+import Accordion from "../accordion/Accordion";
+import { IData } from "../../types";
 
 const App: React.FC = () => {
   const data: IData[] = [
@@ -71,7 +68,11 @@ const App: React.FC = () => {
   ];
   return (
     <div className="App">
-      <header className="App-header"></header>
+      <header className="App-header">
+        <main>
+          <Accordion data={data} />
+        </main>
+      </header>
     </div>
   );
 };

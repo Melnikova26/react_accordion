@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   ListItem,
   ListItemButton,
@@ -9,26 +8,30 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 interface AccordionItemProps {
-  id: number;
   title: string;
-  toggle: (id: number) => void;
+  isOpen: boolean;
+  toggle: () => void;
+  renderAccordionItems: Function;
 }
-const AccordionItem: React.FC<AccordionItemProps> = ({ id, title, toggle }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleChange = (id: number): void => {
-    toggle(id);
-    setIsOpen((prevIsOpen) => !prevIsOpen);
-  };
-
+const AccordionItem: React.FC<AccordionItemProps> = ({
+  title,
+  toggle,
+  isOpen,
+  renderAccordionItems,
+}) => {
   return (
-    <ListItem disablePadding>
-      <ListItemButton>
-        <ListItemIcon onClick={() => toggleChange(id)}>
+    <ListItem
+      disablePadding
+      divider
+      sx={{ flexDirection: "column", alignItems: "flex-start", pl: 2 }}
+    >
+      <ListItemButton component="div" onClick={() => toggle()}>
+        <ListItemIcon>
           {!isOpen ? <ChevronRightIcon /> : <ExpandMoreIcon />}
         </ListItemIcon>
         <ListItemText primary={title} />
       </ListItemButton>
+      {isOpen && renderAccordionItems()}
     </ListItem>
   );
 };
