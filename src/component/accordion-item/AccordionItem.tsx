@@ -1,23 +1,20 @@
-import {
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
+import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-
+import { IData } from "../../types";
 interface AccordionItemProps {
-  title: string;
-  isOpen: boolean;
-  toggle: () => void;
+  item: IData;
+  openItems: number[];
+  toggle: Function;
+  highlight: Function;
   renderAccordionItems: Function;
 }
 const AccordionItem: React.FC<AccordionItemProps> = ({
-  title,
-  toggle,
-  isOpen,
+  item,
   renderAccordionItems,
+  openItems,
+  toggle,
+  highlight,
 }) => {
   return (
     <div style={{ paddingLeft: "20px" }}>
@@ -30,11 +27,16 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
         onClick={() => toggle()}
       >
         <ListItemIcon>
-          {!isOpen ? <ChevronRightIcon /> : <ExpandMoreIcon />}
+          {!openItems.includes(item.id) ? (
+            <ChevronRightIcon />
+          ) : (
+            <ExpandMoreIcon />
+          )}
         </ListItemIcon>
-        <ListItemText primary={title} />
+        <ListItemText primary={highlight()} />
       </ListItemButton>
-      {isOpen && renderAccordionItems()}
+      {openItems.includes(item.id) &&
+        renderAccordionItems(item.children, [...openItems, item.id])}
     </div>
   );
 };
